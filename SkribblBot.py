@@ -33,21 +33,27 @@ except IOError:
     print("bruh ur image is bad like u") # error called if image is not found or something else
     sys.exit(1)
 # skribblImg.show() #shows the image because YOU MUST SEE THE POOOP
+def matprint(mat, fmt="g"):
+    col_maxes = [max([len(("{:"+fmt+"}").format(x)) for x in col]) for col in mat.T]
+    for x in mat:
+        for i, y in enumerate(x):
+            print(("{:"+str(col_maxes[i])+fmt+"}").format(y), end="  ")
+        print("")
 
 width, height = skribblImg.size # getting width and height allows us to iterate over each pixel
 selected_color = "black"
 # sleep(10)
-imagepixel = np.zeros((height, width))
-for x in range(0, width, 10):
-    for y in range(0, height, 10):
+imagepixel = np.zeros((height//10, width//10))
+for x in range(0, width):
+    for y in range(0, height):
         r, g, b = skribblImg.getpixel((x, y))
         if r == 255 and b == 255 and g == 255:
             pass
         else:
-            imagepixel[y, x] = 1.0
+            imagepixel[y//10-1, x//10-1] = 1.0
 
 
-print(imagepixel) # aaaa
+matprint(imagepixel) # aaaa
 
 """
 
