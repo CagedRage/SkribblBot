@@ -1,10 +1,11 @@
-from PIL import Image
+from PIL import Image #importing library for image processing
 import sys
 import pyautogui
-from webcolors import rgb_to_name
-import webcolors
-from colour import Color
+#from webcolors import rgb_to_name
+#import webcolors
+#from colour import Color
 """
+dont mind all of this is doesnt matter anymore but it could help in the future if we do color tracking
 def closest_colour(requested_colour):
     min_colours = {}
     for key, name in webcolors.css21_hex_to_names.items():
@@ -24,13 +25,13 @@ def closest_colour(requested_colour):
 
 """
 try:
-    skribblImg = Image.open("skribbl.jpg")
+    skribblImg = Image.open("skribbl.jpg") #image in same folder as py file
 except IOError:
-    print("bruh ur image is bad like u")
+    print("bruh ur image is bad like u") #error called if image is not found or something else
     sys.exit(1)
-skribblImg.show()
+skribblImg.show() #shows the image because YOU MUST SEE THE POOOP
 
-width, height = skribblImg.size
+width, height = skribblImg.size #getting width and height allows us to iterate over each pixel
 selected_color = "white"
 for x in range(width):
     for y in range(heighgt):
@@ -55,11 +56,11 @@ for x in range(width):
 
 
 
-pyautogui.FAILSAFE = False
+pyautogui.FAILSAFE = False #hope this doesnt brick my computer
 
 #White: Point(x=587, y=935)
 #Black: Point(x=586, y=953)
-pyautogui.moveTo(586, 935, 1)
-pyautogui.moveTo(586, 953, 1)
-print(pyautogui.position())
+#pyautogui.moveTo(586, 935, 1)
+#pyautogui.moveTo(586, 953, 1)
+#print(pyautogui.position())
 #Point(x=485, y=300) FOR SKRIBBL TOP LEFT
