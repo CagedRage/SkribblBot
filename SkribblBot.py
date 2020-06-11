@@ -47,7 +47,7 @@ for x in range(0, width, 10):
             imagepixel[y, x] = 1.0
 
 
-print(imagepixel)
+print(imagepixel) #aaaa
 
 """
 for x in range(0, imagepixel.shape[1]):
