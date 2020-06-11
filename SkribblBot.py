@@ -3,9 +3,9 @@ import sys
 import pyautogui
 from time import sleep
 import numpy as np
-#from webcolors import rgb_to_name
-#import webcolors
-#from colour import Color
+# from webcolors import rgb_to_name
+# import webcolors
+# from colour import Color
 np.set_printoptions(threshold=sys.maxsize)
 """
 dont mind all of this is doesnt matter anymore but it could help in the future if we do color tracking
@@ -28,15 +28,15 @@ def closest_colour(requested_colour):
 
 """
 try:
-    skribblImg = Image.open("skribbl.jpg") #image in same folder as py file
+    skribblImg = Image.open("skribbl.jpg") # image in same folder as py file
 except IOError:
-    print("bruh ur image is bad like u") #error called if image is not found or something else
+    print("bruh ur image is bad like u") # error called if image is not found or something else
     sys.exit(1)
-#skribblImg.show() #shows the image because YOU MUST SEE THE POOOP
+# skribblImg.show() #shows the image because YOU MUST SEE THE POOOP
 
-width, height = skribblImg.size #getting width and height allows us to iterate over each pixel
+width, height = skribblImg.size # getting width and height allows us to iterate over each pixel
 selected_color = "black"
-#sleep(10)
+# sleep(10)
 imagepixel = np.zeros((height, width))
 for x in range(0, width, 10):
     for y in range(0, height, 10):
@@ -47,7 +47,7 @@ for x in range(0, width, 10):
             imagepixel[y, x] = 1.0
 
 
-print(imagepixel) #aaaa
+print(imagepixel) # aaaa
 
 """
 for x in range(0, imagepixel.shape[1]):
@@ -79,11 +79,11 @@ for x in range(0, width, 10):
 #convert /home/cagedrage/Code/Python/RandomProjects/SkribblBot/skribbl.jpg -resize 300x300 /home/cagedrage/Code/Python/RandomProjects/SkribblBot/skribbl.jpg
 """
 
-pyautogui.FAILSAFE = False #hope this doesnt brick my computer
+pyautogui.FAILSAFE = False # hope this doesnt brick my computer
 
-#White: Point(x=587, y=935)
-#Black: Point(x=586, y=953)
-#pyautogui.moveTo(586, 935, 1)
-#pyautogui.moveTo(586, 953, 1)
+# White: Point(x=587, y=935)
+# Black: Point(x=586, y=953)
+# pyautogui.moveTo(586, 935, 1)
+# pyautogui.moveTo(586, 953, 1)
 
-#Point(x=485, y=300) FOR SKRIBBL TOP LEFT
+# Point(x=485, y=300) FOR SKRIBBL TOP LEFT
