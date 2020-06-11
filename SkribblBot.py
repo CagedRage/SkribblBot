@@ -43,14 +43,14 @@ def matprint(mat, fmt="g"):
 width, height = skribblImg.size # getting width and height allows us to iterate over each pixel
 selected_color = "black"
 # sleep(10)
-imagepixel = np.zeros((height//10, width//10))
+imagepixel = np.zeros((height//5, width//5))
 for x in range(0, width):
     for y in range(0, height):
         r, g, b = skribblImg.getpixel((x, y))
-        if r == 255 and b == 255 and g == 255:
+        if r > 200 and b > 200 and g > 200:
             pass
         else:
-            imagepixel[y//10-1, x//10-1] = 1.0
+            imagepixel[y//5-1, x//5-1] = 1.0 #TODO: find out if this is actually -1
 
 
 matprint(imagepixel) # aaaa
