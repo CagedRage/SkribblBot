@@ -50,10 +50,9 @@ for x in range(0, width, 10):
 print(imagepixel) #aaaa
 
 """
-for x in range(0, imagepixel.shape[1]):
-    for y in range(0, imagepixel.shape[0]):
 
-for x in range(0, width, 10):
+
+for x in range(0, width, 10):#this will iterate over every 10th pixel in the image
     for y in range(0, height, 10):
         #will iterate over each pixel
         r, g, b = skribblImg.getpixel((x, y))
@@ -67,7 +66,7 @@ for x in range(0, width, 10):
             pyautogui.moveTo(485+x, 300+y) #moves to the top left of the skribbl drawing board + the specific x and y value we are on
             pyautogui.click(485+x, 300+y, 1, 0, 'left')
 
-            pass
+
         else:
             if selected_color != "black": #if the color is not already selected as wblack on skribbl, click on the black button on skribbl and change var selected color
                 selected_color = "black"
