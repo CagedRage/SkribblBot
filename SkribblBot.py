@@ -51,13 +51,19 @@ for x in range(0, width):
             pass
         else:
             imagepixel[y//5-1, x//5-1] = 1.0 #TODO: find out if this is actually -1
+matprint(imagepixel)
+sleep(5)
+
+matprint(imagepixel)
+for y in range(height//5):
+    for x in range(width//5):
+        pixel = imagepixel[y, x]
+        if pixel == 1 or pixel == 1.0:
+            pyautogui.moveTo(485+x, 300+y) #moves to the top left of the skribbl drawing board + the specific x and y value we are on
+            pyautogui.click(485+x, 300+y, 1, 0, 'left')
 
 
-matprint(imagepixel) # aaaa
-
-"""
-
-
+"""SS
 for x in range(0, width, 10):#this will iterate over every 10th pixel in the image
     for y in range(0, height, 10):
         #will iterate over each pixel
