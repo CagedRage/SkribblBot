@@ -1,4 +1,4 @@
-from PIL import Image #importing library for image processing
+from PIL import Image #importing library for image processing, instead of using pillow fork
 import sys
 import pyautogui
 #from webcolors import rgb_to_name
