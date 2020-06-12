@@ -1,4 +1,4 @@
-from PIL import Image #importing library for image processing, instead of using pillow fork
+from PIL import Image  # importing library for image processing, instead of using pillow fork
 import sys
 import pyautogui
 from time import sleep
@@ -6,59 +6,58 @@ import numpy as np
 # from webcolors import rgb_to_name
 # import webcolors
 # from colour import Color
-np.set_printoptions(threshold=sys.maxsize)
-"""
-dont mind all of this is doesnt matter anymore but it could help in the future if we do color tracking
-def closest_colour(requested_colour):
-    min_colours = {}
-    for key, name in webcolors.css21_hex_to_names.items():
-        r_c, g_c, b_c = webcolors.hex_to_rgb(key)
-        rd = (r_c - requested_colour[0]) ** 2
-        gd = (g_c - requested_colour[1]) ** 2
-        bd = (b_c - requested_colour[2]) ** 2
-        min_colours[(rd + gd + bd)] = name
-    return min_colours[min(min_colours.keys())]
 
-    def get_color_name(requested_color):
-        try:
-        closest_name = rgb_to_name(requested_color)
-    except ValueError:
-        closest_name = closest_colour(requested_color)
-    return closest_name
 
-"""
-try:
-    skribblImg = Image.open("skribbl.jpg") # image in same folder as py file
-except IOError:
-    print("bruh ur image is bad like u") # error called if image is not found or something else
-    sys.exit(1)
-# skribblImg.show() #shows the image because YOU MUST SEE THE POOOP
+# Prints out a 2d ndarray in a readable and presentable format
 def matprint(mat, fmt="g"):
-    col_maxes = [max([len(("{:"+fmt+"}").format(x)) for x in col]) for col in mat.T]
+    col_maxes = [max([len(("{:" + fmt + "}").format(x)) for x in col]) for col in mat.T]
     for x in mat:
         for i, y in enumerate(x):
-            print(("{:"+str(col_maxes[i])+fmt+"}").format(y), end="  ")
+            print(("{:" + str(col_maxes[i]) + fmt + "}").format(y), end="  ")
         print("")
 
-width, height = skribblImg.size # getting width and height allows us to iterate over each pixel
+
+# Converts an image to a black-and-white 2d ndarray representation
+# Color version WIP
+def drawpictureasarray(image):
+    width, height = image.size  # getting width and height allows us to iterate over each pixel
+    imageasarray = np.zeros((height // 10, width // 10))
+    for x in range(0, width):
+        for y in range(0, height):
+            r, g, b = image.getpixel((x, y))
+            if not (r == 255 and b == 255 and g == 255):
+                imageasarray[y // 10 - 1, x // 10 - 1] = 1.0
+
+    return imageasarray
+
+
+# Make numpy not truncate when printing out arrays to display
+np.set_printoptions(threshold=sys.maxsize)
+
+# Open the image - image is now variable skribblImg
+try:
+    skribblImg = Image.open("skribbl.jpg")  # image in same folder as py file
+except IOError:
+    print("bruh ur image is bad like u")  # error called if image is not found or something else
+    sys.exit(1)
+
+# skribblImg.show() # uncomment this if you want to display the image
+
+imagepixel = drawpictureasarray(skribblImg)
+
+matprint(imagepixel)  # aaaa
+
+# selected_color variable keeps track of currently selected color
 selected_color = "black"
-# sleep(10)
-imagepixel = np.zeros((height//10, width//10))
-for x in range(0, width):
-    for y in range(0, height):
-        r, g, b = skribblImg.getpixel((x, y))
-        if r == 255 and b == 255 and g == 255:
-            pass
-        else:
-            imagepixel[y//10-1, x//10-1] = 1.0
 
-
-matprint(imagepixel) # aaaa
+pyautogui.FAILSAFE = False  # hope this doesnt brick my computer
 
 """
+# WIP MAIN LOOP FOR DRAWING THE IMAGE
+# No longer necessary in this exact format because we have a pre-calculated array to draw
+# However, this can still maybe serve as a framework in the future
 
-
-for x in range(0, width, 10):#this will iterate over every 10th pixel in the image
+for x in range(0, width, 10): # this will iterate over every 10th pixel in the image
     for y in range(0, height, 10):
         #will iterate over each pixel
         r, g, b = skribblImg.getpixel((x, y))
@@ -81,10 +80,28 @@ for x in range(0, width, 10):#this will iterate over every 10th pixel in the ima
             pyautogui.moveTo(485+x, 300+y)  #moves to the top left of the skribbl drawing board + the specific x and y value we are on
             pyautogui.click(485+x, 300+y, 1, 0, 'left')
 
-#convert /home/cagedrage/Code/Python/RandomProjects/SkribblBot/skribbl.jpg -resize 300x300 /home/cagedrage/Code/Python/RandomProjects/SkribblBot/skribbl.jpg
+# convert /home/cagedrage/Code/Python/RandomProjects/SkribblBot/skribbl.jpg -resize 300x300 /home/cagedrage/Code/Python/RandomProjects/SkribblBot/skribbl.jpg
 """
 
-pyautogui.FAILSAFE = False # hope this doesnt brick my computer
+"""
+# Potential design for color "rounding" - unused currently, but could work in the future
+def closest_colour(requested_colour):
+    min_colours = {}
+    for key, name in webcolors.css21_hex_to_names.items():
+        r_c, g_c, b_c = webcolors.hex_to_rgb(key)
+        rd = (r_c - requested_colour[0]) ** 2
+        gd = (g_c - requested_colour[1]) ** 2
+        bd = (b_c - requested_colour[2]) ** 2
+        min_colours[(rd + gd + bd)] = name
+    return min_colours[min(min_colours.keys())]
+
+    def get_color_name(requested_color):
+        try:
+        closest_name = rgb_to_name(requested_color)
+    except ValueError:
+        closest_name = closest_colour(requested_color)
+    return closest_name
+"""
 
 # White: Point(x=587, y=935)
 # Black: Point(x=586, y=953)
@@ -92,3 +109,4 @@ pyautogui.FAILSAFE = False # hope this doesnt brick my computer
 # pyautogui.moveTo(586, 953, 1)
 
 # Point(x=485, y=300) FOR SKRIBBL TOP LEFT
+
