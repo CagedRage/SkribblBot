@@ -26,8 +26,6 @@ def drawpictureasarray(image):
     imageasarray = np.zeros((height // 10, width // 10))
     for x in range(0, width, 10):
         for y in range(0, height, 10):
-            if x == 150 and y == 150:
-                print("owo?")
             r, g, b = image.getpixel((x, y))
             imageasarray[y // 10 - 1, x // 10 - 1] = getcolorrgb([r, g, b])
 
