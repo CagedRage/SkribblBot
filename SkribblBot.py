@@ -41,7 +41,7 @@ except IOError:
     print("bruh ur image is bad like u")  # error called if image is not found or something else
     sys.exit(1)
 
-# skribblImg.show() # uncomment this if you want to display the image
+# skribblImg.show() # uncomment this if you want to display the image 
 
 imagepixel = drawpictureasarray(skribblImg)
 
@@ -49,14 +49,22 @@ matprint(imagepixel)  # aaaa
 
 # selected_color variable keeps track of currently selected color
 selected_color = "black"
-
 pyautogui.FAILSAFE = False  # hope this doesnt brick my computer
+sleep(5)
 
-"""
+rows = len(imagepixel) 
+columns = len(imagepixel[0]) 
 # WIP MAIN LOOP FOR DRAWING THE IMAGE
+for x in range(0,rows): # this will iterate over every 10th pixel in the image
+    for y in range(0, columns):
+        if imagepixel[y][x]==0:
+            next
+        else:            
+            pyautogui.moveTo(485+(x*10), 300+(y*10))  #moves to the top left of the skribbl drawing board + the specific x and y value we are on
+            pyautogui.click()
 # No longer necessary in this exact format because we have a pre-calculated array to draw
 # However, this can still maybe serve as a framework in the future
-
+"""
 for x in range(0, width, 10): # this will iterate over every 10th pixel in the image
     for y in range(0, height, 10):
         #will iterate over each pixel
@@ -66,23 +74,23 @@ for x in range(0, width, 10): # this will iterate over every 10th pixel in the i
 
             if selected_color != "white": #if the color is not already selected as white on skribbl, click on the white button on skribbl and change var selected color
                 selected_color = "white"
-                pyautogui.moveTo(586, 935)
-                pyautogui.click(586, 935, 1, 0 'left')
+                pyautogui.moveTo(x=889, y=110)
+                pyautogui.click()
             pyautogui.moveTo(485+x, 300+y) #moves to the top left of the skribbl drawing board + the specific x and y value we are on
-            pyautogui.click(485+x, 300+y, 1, 0, 'left')
+            pyautogui.click()
 
 
         else:
             if selected_color != "black": #if the color is not already selected as wblack on skribbl, click on the black button on skribbl and change var selected color
                 selected_color = "black"
-                pyautogui.moveTo(586, 953)
-                pyautogui.click(586, 953, 1, 0, 'left')
+                pyautogui.moveTo(x=889, y=68)
+                pyautogui.click()
             pyautogui.moveTo(485+x, 300+y)  #moves to the top left of the skribbl drawing board + the specific x and y value we are on
-            pyautogui.click(485+x, 300+y, 1, 0, 'left')
+            pyautogui.click()
 
 # convert /home/cagedrage/Code/Python/RandomProjects/SkribblBot/skribbl.jpg -resize 300x300 /home/cagedrage/Code/Python/RandomProjects/SkribblBot/skribbl.jpg
-"""
 
+"""
 """
 # Potential design for color "rounding" - unused currently, but could work in the future
 def closest_colour(requested_colour):
@@ -101,8 +109,14 @@ def closest_colour(requested_colour):
     except ValueError:
         closest_name = closest_colour(requested_color)
     return closest_name
+def print_color()
+        width, height = image.size  # getting width and height allows us to iterate over each pixel
+    imageasarray = np.zeros((height // 10, width // 10))
+    for x in range(0, width):
+        for y in range(0, height):
+            r, g, b = image.getpixel((x, y))
 """
-
+            
 # White: Point(x=587, y=935)
 # Black: Point(x=586, y=953)
 # pyautogui.moveTo(586, 935, 1)
